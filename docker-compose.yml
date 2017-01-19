@@ -5,7 +5,7 @@ services:
       command: elasticsearch
       environment:
         # This helps ES out with memory usage
-        - ES_JAVA_OPTS=-Xmx1g -Xms1g
+        - ES_JAVA_OPTS=-Xmx2g -Xms2g
       volumes:
         # Persist elasticsearch data to a volume
         - elasticsearch:/usr/share/elasticsearch/data
@@ -50,6 +50,7 @@ services:
         - "8080:80"
       environment:
         KOPF_ES_SERVERS: "elasticsearch:9200"
+        KOPF_SERVER_NAME: "kopf1"
       links:
         - elasticsearch
 

@@ -15,3 +15,8 @@ For example, you can modify the default amount of heap memory used for Elasticse
 Similarly, you can adjust the heap memory for Logstash by editing the `LS_HEAP_SIZE=2048m` section in the logstash definition.
 
 The default values for these are 1GB (for ES) and 2GB (for Logstash).
+
+
+# Problems
+
+sudo sysctl -w vm.max_map_count=262144
