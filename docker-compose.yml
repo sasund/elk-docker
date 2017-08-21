@@ -1,7 +1,7 @@
 version: '2'
 services:
     elasticsearch:
-      image: elasticsearch:5
+      image: elasticsearch:latest
       command: elasticsearch
       environment:
         # This helps ES out with memory usage
@@ -16,7 +16,7 @@ services:
         - "9300:9300"
 
     logstash:
-      image: logstash:5
+      image: logstash:latest
       command: logstash --auto-reload -w 4 -f /etc/logstash/conf.d/logstash.conf
       environment:
         # This helps Logstash out if it gets too busy
@@ -35,7 +35,7 @@ services:
         - elasticsearch
 
     kibana:
-      image: kibana:5
+      image: kibana:latest
       environment:
         # Point Kibana to the elasticsearch container
         - ELASTICSEARCH_URL=http://elasticsearch:9200
@@ -44,13 +44,10 @@ services:
       links:
         - elasticsearch
 
-    kopf:
-      image: rancher/kopf:v0.4.0
+    head:
+      image: mobz/elasticsearch-head:5
       ports:
-        - "8080:80"
-      environment:
-        KOPF_ES_SERVERS: "elasticsearch:9200"
-        KOPF_SERVER_NAME: "kopf1"
+        - "9100:9100"
       links:
         - elasticsearch
 
